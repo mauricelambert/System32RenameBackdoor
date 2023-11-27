@@ -78,6 +78,8 @@ namespace BackdoorCheck
                 return true;
             } else if (FileIsBackdoored(Path.Combine(Environment.SystemDirectory, "utilman.exe"))) {
                 return true;
+            } else if (FileIsBackdoored(Path.Combine(Environment.SystemDirectory, "sethc.exe"))) {
+                return true;
             }
 
             return FileIsBackdoored(Path.Combine(Environment.SystemDirectory, "osk.exe"));
@@ -130,3 +132,19 @@ if ([BackdoorCheck.BackdoorCheck]::CmdIsBackdoored()) {
 ## Import module and use types (namespace -> class -> method)
 ### [void]([<#1#>Reflection.Assembly<#1#>]::Load($apprun))
 ### [BackdoorCheck.BackdoorCheck]::CmdIsBackdoored()
+
+<#
+In BackdoorCheck.csproj:
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+</Project>
+
+dotnet publish -r win-x64  -p:PublishSingleFile=true --self-contained true -c Release
+#>
