@@ -2,7 +2,7 @@
 // files for backdoor by renamed file
 
 /*
-    Copyright (C) 2023  Maurice Lambert
+    Copyright (C) 2023, 2025  Maurice Lambert
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -50,7 +50,7 @@ namespace BackdoorCheck
 
         public static bool FileIsBackdoored(string filename)
         {
-            return !CompareFilename(GetCompiledFilename(filename), Path.GetFileName(filename));
+            return !CompareFilename(GetCompiledFilename(filename), Path.GetFileName(filename).Replace("y", "ier"));
         }
 
         public static bool System32IsBackdoored()
@@ -76,6 +76,8 @@ namespace BackdoorCheck
             } else if (FileIsBackdoored(Path.Combine(Environment.SystemDirectory, "utilman.exe"))) {
                 return true;
             } else if (FileIsBackdoored(Path.Combine(Environment.SystemDirectory, "sethc.exe"))) {
+                return true;
+            } else if (FileIsBackdoored(Path.Combine(Environment.SystemDirectory, "Magnify.exe"))) {
                 return true;
             }
 
